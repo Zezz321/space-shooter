@@ -16,6 +16,9 @@ public class Player {
         this.x = startX; this.y = startY; this.stats = stats;
     }
 
+    /**
+     * Updates player position based on input and speed stats
+     */
     public void update() {
         int spd = stats.getSpeed();
         if (movingLeft  && x > 0) x -= spd;
@@ -26,10 +29,13 @@ public class Player {
         if (invincible) { invincibleTimer--; if (invincibleTimer <= 0) invincible = false; }
     }
 
+    /**
+     * Renders the player ship with shield effect if active
+     */
     public void draw(Graphics2D g) {
         if (invincible && (invincibleTimer / 5) % 2 == 0) return;
 
-        // Shield ring
+        // Shield ring effect
         if (stats.shields > 0) {
             g.setColor(new Color(0, 200, 255, 60));
             g.setStroke(new BasicStroke(3));
@@ -37,19 +43,23 @@ public class Player {
             g.setStroke(new BasicStroke(1));
         }
 
+        // Engine glow
         g.setColor(new Color(0, 200, 255, 120));
         g.fillOval(x + 10, y + HEIGHT - 10, 20, 20);
 
+        // Main body (triangular shape)
         int[] xPoints = {x + WIDTH/2, x, x + WIDTH};
         int[] yPoints = {y, y + HEIGHT, y + HEIGHT};
         g.setColor(new Color(0, 220, 255));
         g.fillPolygon(xPoints, yPoints, 3);
 
+        // Highlight
         int[] hxPoints = {x + WIDTH/2, x + 10, x + WIDTH - 10};
         int[] hyPoints = {y + 5, y + HEIGHT - 5, y + HEIGHT - 5};
         g.setColor(new Color(150, 240, 255));
         g.fillPolygon(hxPoints, hyPoints, 3);
 
+        // Cockpit
         g.setColor(new Color(0, 100, 200));
         g.fillOval(x + WIDTH/2 - 8, y + 10, 16, 16);
     }
@@ -57,17 +67,33 @@ public class Player {
     public boolean canShoot() { return shootTimer == 0; }
     public void shoot()       { shootTimer = stats.getShootCooldown(); }
 
+    /**
+     * Creates bullets based on spread shot stacks
+     * 1 stack = 2 bullets (spread)
+     * 2 stacks = 3 bullets (full spread)
+     */
     public Bullet[] createBullets() {
-        if (stats.spreadShot) {
+        if (stats.spreadShotStacks >= 2) {
+            // Triple shot (full spread)
             return new Bullet[]{
                     new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y, -12, true),
                     new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 - 16, y + 8, -12, true),
                     new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 + 16, y + 8, -12, true)
             };
+        } else if (stats.spreadShotStacks >= 1) {
+            // Double shot
+            return new Bullet[]{
+                    new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 - 12, y + 4, -12, true),
+                    new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 + 12, y + 4, -12, true)
+            };
         }
+        // Single shot
         return new Bullet[]{ new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y, -12, true) };
     }
 
+    /**
+     * Handles player being hit - shields absorb damage first
+     */
     public void hit() {
         if (invincible) return;
         if (stats.shields > 0) { stats.shields--; invincible = true; invincibleTimer = 60; return; }

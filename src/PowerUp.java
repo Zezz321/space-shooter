@@ -1,4 +1,4 @@
-//enum to sztywna lista wyboru, z której nie da się wyjść poza szereg.
+//enum - a special Java type that defines a fixed set of constants.
 public enum PowerUp {
     SHIELD("Shield", "Absorbs 1 hit", "🛡"),
     RAPID_FIRE("Rapid Fire", "Shoot 2x faster", "⚡"),

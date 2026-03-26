@@ -6,6 +6,9 @@ public class GameWindow extends JFrame {
     public static final int HEIGHT = 600;
     public static final String TITLE = "Space Shooter";
 
+    /**
+     * Constructor - creates the main game window
+     */
     public GameWindow() {
         setTitle(TITLE);
         setSize(WIDTH, HEIGHT);

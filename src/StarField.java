@@ -7,6 +7,9 @@ public class StarField {
     private int[] x, y, size, speed, alpha;
     private static final Random RAND = new Random();
 
+    /**
+     * Initializes star positions with random properties
+     */
     public StarField() {
         x = new int[STAR_COUNT]; y = new int[STAR_COUNT];
         size = new int[STAR_COUNT]; speed = new int[STAR_COUNT];
@@ -20,6 +23,9 @@ public class StarField {
         }
     }
 
+    /**
+     * Updates star positions (scrolling effect)
+     */
     public void update() {
         for (int i = 0; i < STAR_COUNT; i++) {
             y[i] += speed[i];
@@ -27,6 +33,9 @@ public class StarField {
         }
     }
 
+    /**
+     * Renders stars with varying brightness
+     */
     public void draw(Graphics2D g) {
         for (int i = 0; i < STAR_COUNT; i++) {
             g.setColor(new Color(255, 255, 255, alpha[i]));
