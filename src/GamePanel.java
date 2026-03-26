@@ -106,7 +106,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
                     available.add(p);
                     break;
                 case RAPID_FIRE:
-                    if (stats.rapidFireStacks < 4) available.add(p);
+                    if (stats.rapidFireStacks < 5) available.add(p);
                     break;
                 case SPREAD_SHOT:
                     if (stats.spreadShotStacks < 2) available.add(p);
@@ -144,7 +144,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
                 stats.shields++;
                 break;
             case RAPID_FIRE:
-                if (stats.rapidFireStacks < 4) {
+                if (stats.rapidFireStacks < 5) {
                     stats.rapidFireStacks++;
                 }
                 break;
@@ -425,7 +425,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener {
         g.setFont(smallFont);
         fm = g.getFontMetrics();
         String statsStr = "Speed +" + stats.speedBoosts + "/3" +
-                "  |  RapidFire x" + stats.rapidFireStacks + "/4" +
+                "  |  RapidFire x" + stats.rapidFireStacks + "/5" +
                 "  |  Shields: " + stats.shields +
                 (stats.spreadShotStacks > 0 ? "  |  Spread x" + stats.spreadShotStacks + "/2" : "");
         g.setColor(new Color(150, 200, 255));

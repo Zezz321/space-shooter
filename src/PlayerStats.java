@@ -1,6 +1,6 @@
 public class PlayerStats {
     public int speedBoosts = 0;      // Max 3 stacks
-    public int rapidFireStacks = 0;  // Max 4 stacks
+    public int rapidFireStacks = 0;  // Max 5 stacks
     public int spreadShotStacks = 0; // Max 2 stacks
     public boolean spreadShot = false; // Kept for compatibility
     public int shields = 0;
@@ -20,8 +20,8 @@ public class PlayerStats {
      * Each stack reduces cooldown significantly
      */
     public int getShootCooldown() {
-        // Base cooldown 15, each stack reduces by ~3, minimum 4
-        int cooldown = 15 - (rapidFireStacks * 3);
-        return Math.max(4, cooldown);
+        // Base cooldown 15, each stack reduces by ~2
+        int cooldown = 15 - (rapidFireStacks * 2);
+        return Math.max(7, cooldown);
     }
 }
