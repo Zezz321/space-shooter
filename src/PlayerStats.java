@@ -1,6 +1,6 @@
 public class PlayerStats {
     public int speedBoosts = 0;      // Max 3 stacks
-    public int rapidFireStacks = 0;  // Max 5 stacks
+    public int rapidFireStacks = 0;  // Max 4 stacks
     public int spreadShotStacks = 0; // Max 2 stacks
     public boolean spreadShot = false; // Kept for compatibility
     public int shields = 0;

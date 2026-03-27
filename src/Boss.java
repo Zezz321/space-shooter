@@ -8,7 +8,7 @@ public class Boss {
     private float speedX = 2;
     private int health, maxHealth;
     private int shootTimer = 0;
-    private int shootCooldown = 40;
+    private int shootCooldown = 30;
     private int wave;
     private boolean isFinalBoss;
 
@@ -24,12 +24,12 @@ public class Boss {
 
         if (isFinalBoss) {
             // Final boss has much more health and shoots faster
-            maxHealth = health = 100;
+            maxHealth = health = 200;
             shootCooldown = 25;
-            speedX = 3;
+            speedX = 5;
         } else {
             // Regular boss health scales with wave
-            maxHealth = health = 10 + (wave / 5) * 8;
+            maxHealth = health = 80 + (wave / 5) * 8;
         }
     }
 
@@ -114,9 +114,9 @@ public class Boss {
      */
     public Bullet[] createBullets() {
         return new Bullet[]{
-                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y + HEIGHT, 5, false),
-                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 - 20, y + HEIGHT, 5, false),
-                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 + 20, y + HEIGHT, 5, false)
+                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2, y + HEIGHT, 7, false),
+                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 - 20, y + HEIGHT, 7, false),
+                new Bullet(x + WIDTH/2 - Bullet.WIDTH/2 + 20, y + HEIGHT, 7, false)
         };
     }
 
